@@ -53,11 +53,13 @@ where $M$ is the decimation factor.
 Let us denote the signal to be discriminated by $y$, and the discriminated signal by $z$, then we have
 
 $$
-z = \frac{\mathrm{d}}{\mathrm{d}\,t} \arctan \frac{\mathrm{Im}(y)}{\mathrm{Re}(y)}
+z = \frac{\mathrm{d}}{\mathrm{d}t} \arctan \frac{\mathrm{Im}(y)}{\mathrm{Re}(y)}
     = \frac{\mathrm{Re}(y)\cdot [\mathrm{Im}(y)]^\prime - \mathrm{Im}(y)\cdot [\mathrm{Re}(y)]^\prime}{[\mathrm{Re}(y)]^2+[\mathrm{Im}(y)]^2},
 $$
 
-where $\mathrm{Re}$ and $\mathrm{Im}$ stand for taking the real and the imaginary part of a complex number. This is the core step of FM demodulation.
+where $\mathrm{Re}$ and $\mathrm{Im}$ stand for taking the real and the imaginary part of a complex number. 
+
+This is the core step of FM demodulation.
 
 We can rewrite the above equation into its discrete form
 
