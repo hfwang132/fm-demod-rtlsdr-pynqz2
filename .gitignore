@@ -1,0 +1,9 @@
+**/.ipynb_checkpoints/*
+
+board/notebooks/samples_received.npy
+
+board/notebooks/bak/
+
+board/overlay/*
+!board/overlay/system-128.*
+
