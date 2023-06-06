@@ -12,6 +12,7 @@ As shown in the flow chart above, the steps of the signal processing can be summ
 2. The `uint8` bytes are converted into 64-bit float (`np.float64`).
 3. The 64-bit data are reinterpreted as 128-bit complex numbers. The `np.complex128` is a native data type provided by `numpy`. It is stored in RAM as in the order `real[0], imag[0], real[1], imag[1], ...`.
 4. All `np.complex128` numbers are substracted by `(128 + 128j)`. This is because the original data type is `uint8`, which ranges from 0 to 255, and we should subtract by 128 to get a range from -128 to 127.
+5. !!! TBD
 
 The (pseudo-)code is as follows:
 
@@ -29,7 +30,7 @@ samples_2 = decimation_filter_1(samples_discriminated) # np.float64, len=48k
 IPython.display.Audio(samples_2) # play the audio
 ```
 
-For details, see the notebook `board/notebooks/01-Demodulating_FM_Signals.ipynb`.
+For details, see the [notebook 01](board/notebooks/01-Demodulating_FM_Signals.ipynb).
 
 ## 1.2 Algorithms
 
