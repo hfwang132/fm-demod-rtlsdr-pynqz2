@@ -13,10 +13,10 @@ First, we provide an overall view of what is happening during the whole FM demod
 As shown in the flow chart above, the steps of the signal processing can be summarized as follows:
 
  1. The raw data (`uint8`) is converted to `np.complex128` data type. The details are listed as follows:
-    * The RTL-SDR reads in unsigned 8-bit data (`np.uint8`) via USB 2.0. The order of the data is `I0[7:0], Q0[7:0], I1[7:0], Q1[7:0], ...`.
-    * The `uint8` bytes are converted into 64-bit float (`np.float64`).
-    * The 64-bit data are reinterpreted as 128-bit complex numbers. The `np.complex128` is a native data type provided by `numpy`. It is stored in RAM as in the order `real[0], imag[0], real[1], imag[1], ...`.
-    * All `np.complex128` numbers are substracted by `(128 + 128j)`. This is because the original data type is `uint8`, which ranges from 0 to 255, and we should subtract by 128 to get a range from -128 to 127.
+    a. The RTL-SDR reads in unsigned 8-bit data (`np.uint8`) via USB 2.0. The order of the data is `I0[7:0], Q0[7:0], I1[7:0], Q1[7:0], ...`.
+    b. The `uint8` bytes are converted into 64-bit float (`np.float64`).
+    c. The 64-bit data are reinterpreted as 128-bit complex numbers. The `np.complex128` is a native data type provided by `numpy`. It is stored in RAM as in the order `real[0], imag[0], real[1], imag[1], ...`.
+    d. All `np.complex128` numbers are substracted by `(128 + 128j)`. This is because the original data type is `uint8`, which ranges from 0 to 255, and we should subtract by 128 to get a range from -128 to 127.
  2. The complex data are passed through a decimation filter with a factor of 10. The sample rate of the signal is divided by 10. The sample rate is decreased from 2.4M to 240k.
  3. The filtered and decimated complex data are passed through a phase discriminator. The phase discriminator takes complex data in, and output the difference of the phase (argument) of the complex data.
  4. The phase-discriminated data are again passed through a second decimation filter with a factor of 5, so that the sample rate of the signal is divided by 5. The sample rate is decreased from 240k to 48k.
