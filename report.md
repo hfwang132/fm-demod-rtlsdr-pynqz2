@@ -102,7 +102,7 @@ The purpose of oversampling followed by decimation is to
 - Increase resolution.
   By increasing the sampling rate, the resolution of the signal is improved, allowing for better representation of both small and large amplitude variations.
 
-For more details about the design considerations and the selection of filter coefficients and sampling rates, see [notebook 01](board/notebooks/01-Demodulating_FM_Signals.ipynb).
+For more details about design considerations and the selection of parameters (filter coefficients and decimation factors), see [notebook 01](board/notebooks/01-Demodulating_FM_Signals.ipynb).
 
 # 2 Hardware Acceleration
 
@@ -123,6 +123,8 @@ samples_2 = decimation_filter_1(samples_discriminated)
 
 The baseline implementation can be found at `hls/`.
 
+The version of Vitis HLS is 2020.2.
+
 ## 2.2 Optimization Guidelines
 
 To achieve real-time processing, we must optimize the data flow so that the throughput of FM demodulation is larger than the sampling rate of the incoming signals. For example, if the incoming signals have a sampling rate of 2.4M, then the throughput must be greater than 2.4M in order to achieve real-time streaming. The baseline implementation has achieved a throughput of >6M.
@@ -137,7 +139,9 @@ To further optimize the project, we can consider the following:
    b. implement complex filters that involve the cross-operation between the imaginary and real parts of complex numbers, which is more efficient in terms of hardware resources.
    c. implement CIC filters which consume even less area.
 
-# 3 Streaming the Audio (Optional)
+The possible optimization techniques are not limited to the above.
+
+# 3 Streaming the Audio
 
 For streaming the audio, the `asyncio` library is used. See [notebook 04](board/notebooks/04-FM_Radio_Player_App.ipynb).
 
@@ -145,4 +149,4 @@ For streaming the audio, the `asyncio` library is used. See [notebook 04](board/
 
 ![async](image/report/async.jpg)
 
-As shown in the above picture, there are three CPU tasks. The first task is to receive the raw data from the RTL-SDR, the second task is to perform some necessary CPU operations, and the third task is to play the audio. The main part of the algorithm has been offloaded to the FPGA and is denoted by "dma transfer" in the picture.
+As shown in the above picture, there are three CPU tasks and one FPGA task. The first CPU task is to receive the raw data from the RTL-SDR, the second CPU task is to perform some necessary CPU operations (data-type conversion, copying data, and polling UI events), and the third CPU task is to play the audio. The main part of the algorithm has been offloaded to the FPGA and is denoted by "dma transfer" in the picture. Since the throughput of DMA is larger than the sampling rate, we can play the audio immediately after initializing a DMA transfer.
