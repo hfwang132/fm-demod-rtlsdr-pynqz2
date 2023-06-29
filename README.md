@@ -4,6 +4,10 @@
 
 In this project, we have accelerated FM demodulation algorithms using HLS, making it possible to stream FM audios (i.e., demodulate the data into audios in real time). Based on that, we have developed a simple FM radio receiver applet in the Jupyter Notebook.
 
+![rtl-sdr](image/report/rtl-sdr.jpeg)
+
+The hardware platform was PYNQ-Z2 & RTL-SDR dongle.
+
 ## 1.1 An Overall View
 
 First, we provide an overall view of what is happening during the whole FM demodulation process.
