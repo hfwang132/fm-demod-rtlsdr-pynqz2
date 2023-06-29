@@ -8,6 +8,8 @@ In this project, we have accelerated FM demodulation algorithms using HLS, makin
 
 The hardware platform was PYNQ-Z2 & RTL-SDR dongle.
 
+[Demo video](https://hfwang132.github.io/zh-cn/xilinx-work/files/rtl-sdr.mp4)
+
 ## 1.1 An Overall View
 
 First, we provide an overall view of what is happening during the whole FM demodulation process.
